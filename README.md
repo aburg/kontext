@@ -39,7 +39,7 @@ jq -r '.created' "$(kontext get project -p)"
 
 ### Use context as a taskwarrior project
 
-You can use kontext to
+You can use kontext to achieve context sensible taskwarrior tasks.
 
 ```[bash]
 uuidgen > .project.kontext
