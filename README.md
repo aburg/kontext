@@ -1,5 +1,7 @@
 # Kontext
 
+Get context information from files hidden your file tree.
+
 Think of this as a different direnv that does not put anything into env and where every value is in a separate file.
 
 ## Installation
