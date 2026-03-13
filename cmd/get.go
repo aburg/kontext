@@ -63,5 +63,5 @@ var getCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(getCmd)
 
-	getCmd.Flags().BoolP("return-path", "r", false, "return the context file's path instead it's content")
+	getCmd.Flags().BoolP("return-path", "p", false, "return the context file's path instead it's content")
 }
