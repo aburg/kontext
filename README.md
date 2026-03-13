@@ -15,14 +15,13 @@ go install -ldflags="-s -w"
 kontext get project
 
 #create a context file with a uuid in it
-uuidgen > .project.kontext
+uuidgen > ../.project.kontext
 
 # this will show the full path of the context file
-kontext get project
+kontext get project -p
 
 # this will output the generated context uuid
-# this will also work when you are one directory deeper
-cat $(kontext project)
+kontext get project
 ```
 
 ### Use a context with a JSON store
@@ -30,10 +29,10 @@ cat $(kontext project)
 ```[bash]
 jq -n --arg date "$(date -u +"%Y-%m-%dT%H:%M:%SZ")" \
       --arg uuid "$(uuidgen)" \
-      '{created: $date, id: $id}' > .project.kontext
+      '{created: $date, uuid: $uuid}' > .project.kontext
 
-jq -r '.uuid' "$(kontext get project)"
-jq -r '.created' "$(kontext get project)"
+jq -r '.uuid' "$(kontext get project -p)"
+jq -r '.created' "$(kontext get project -p)"
 ```
 
 ### Use context as a taskwarrior project
@@ -49,4 +48,4 @@ task add project:$(kontext get project) "this is another new task for THIS proje
 task project:$(kontext get project)
 ```
 
-Get wild! <3
+Get wild and share your use case! <3
