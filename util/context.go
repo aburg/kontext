@@ -6,7 +6,7 @@ import (
 )
 
 func FindContext(kind string) (string, error) {
-	filename := "." + kind + ".kontext"
+	filename := CreateKontextFilename(kind)
 
 	wd, err := os.Getwd()
 	if err != nil {
