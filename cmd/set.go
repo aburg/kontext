@@ -32,6 +32,8 @@ var setCmd = &cobra.Command{
 	Short: "set the context of the given kind",
 	Args:  cobra.ExactArgs(2),
 	RunE: func(cmd *cobra.Command, args []string) error {
+		util.ChangeWorkdir(cmd)
+
 		kind := args[0]
 		value := args[1]
 		return util.SetFileContent(kind, value)

@@ -34,7 +34,8 @@ var getCmd = &cobra.Command{
 	Short: "get the context for the given kind",
 	Args:  cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		// actual work
+		util.ChangeWorkdir(cmd)
+
 		kind := args[0]
 		path, err := util.FindContext(kind)
 		if err != nil {

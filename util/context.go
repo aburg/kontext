@@ -26,7 +26,7 @@ func FindContext(kind string) (string, error) {
 		if exists {
 			return testfile, nil
 		} else if testdir == "/" {
-			return "", fmt.Errorf("no context file found")
+			return "", fmt.Errorf("no context file found (looking for \"%s\" from \"%s\" and upwards)", testfile, wd)
 		} else {
 			testdir, err = JoinAbs(testdir, "..")
 			if err != nil {

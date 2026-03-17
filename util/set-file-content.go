@@ -16,7 +16,7 @@ func SetFileContent(kind string, value string) error {
 		return err
 	}
 	if exists {
-		return fmt.Errorf("that context is already set at %s", filepath)
+		return fmt.Errorf("context is already set inside \"%s\" at \"%s\"", filepath, getWd())
 	}
 
 	err = os.WriteFile(filename, []byte(value), 0o666)

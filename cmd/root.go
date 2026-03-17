@@ -38,3 +38,9 @@ func Execute() {
 		os.Exit(1)
 	}
 }
+
+func init() {
+	rootCmd.PersistentFlags().BoolP("home", "1", false, "work from home directory ($HOME)")
+	rootCmd.PersistentFlags().BoolP("config", "2", false, "work from config directory ($XDG_CONFIG_HOME)")
+	rootCmd.PersistentFlags().BoolP("cache", "3", false, "work from cache directory ($XDG_CACHE_HOME)")
+}
