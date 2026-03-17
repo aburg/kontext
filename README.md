@@ -16,14 +16,33 @@ go install -ldflags="-s -w"
 # this will fail b/c there is no context file yet
 kontext get project
 
-#create a context file with a uuid in it
+# create a context file with a uuid in it
+# (you cannot yet use the set-command for setting context one directory up)
 uuidgen > ../.project.kontext
 
-# this will show the full path of the context file
-kontext get project -p
+# this will show the path of the context file
+kontext get project -f
 
 # this will output the generated context uuid
 kontext get project
+```
+
+### Set some context
+
+```[bash]
+kontext set project "$(uuidgen -7)"
+```
+
+### Get context file
+
+```[bash]
+kontext get project -f
+```
+
+### Get context directory
+
+```[bash]
+dirname "$(kontext get project -f)"
 ```
 
 ### Use a context with a JSON store
@@ -33,8 +52,8 @@ jq -n --arg date "$(date -u +"%Y-%m-%dT%H:%M:%SZ")" \
       --arg uuid "$(uuidgen)" \
       '{created: $date, uuid: $uuid}' > .project.kontext
 
-jq -r '.uuid' "$(kontext get project -p)"
-jq -r '.created' "$(kontext get project -p)"
+jq -r '.uuid' "$(kontext get project -f)"
+jq -r '.created' "$(kontext get project -f)"
 ```
 
 ### Use context as a taskwarrior project
