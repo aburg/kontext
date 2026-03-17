@@ -42,13 +42,13 @@ var getCmd = &cobra.Command{
 		}
 
 		// which kind of output is wanted?
-		returnPath, err := cmd.Flags().GetBool("return-path")
+		returnContextfile, err := cmd.Flags().GetBool("return-contextfile")
 		if err != nil {
 			return err
 		}
 
 		// output
-		if returnPath {
+		if returnContextfile {
 			fmt.Println(path)
 		} else {
 			if err = util.PrintFileContent(path); err != nil {
