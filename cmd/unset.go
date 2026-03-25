@@ -22,22 +22,46 @@ THE SOFTWARE.
 package cmd
 
 import (
-	"fmt"
-
+	"github.com/aburg/kontext/util"
 	"github.com/spf13/cobra"
 )
 
-const VERSION = "0.0.5"
+// unsetCmd represents the unset command
+var unsetCmd = &cobra.Command{
+	Use:   "unset <kind>",
+	Short: "unset the context of the given kind (and return the latest value)",
+	Args:  cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		util.ChangeWorkdir(cmd)
 
-// versionCmd represents the version command
-var versionCmd = &cobra.Command{
-	Use:   "version",
-	Short: "Print the current program version",
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(VERSION)
+		kind := args[0]
+		path, err := util.FindContext(kind)
+		if err != nil {
+			return err
+		}
+
+		if err = util.PrintFileContent(path); err != nil {
+			return err
+		}
+
+		if err = util.DeleteFile(path); err != nil {
+			return err
+		}
+
+		return nil
 	},
 }
 
 func init() {
-	rootCmd.AddCommand(versionCmd)
+	rootCmd.AddCommand(unsetCmd)
+
+	// Here you will define your flags and configuration settings.
+
+	// Cobra supports Persistent Flags which will work for this command
+	// and all subcommands, e.g.:
+	// unsetCmd.PersistentFlags().String("foo", "", "A help for foo")
+
+	// Cobra supports local flags which will only run when this command
+	// is called directly, e.g.:
+	// unsetCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

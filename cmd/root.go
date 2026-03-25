@@ -27,9 +27,12 @@ import (
 	"github.com/spf13/cobra"
 )
 
+const VERSION = "v0.0.6"
+
 var rootCmd = &cobra.Command{
-	Use:   "kontext",
-	Short: "Work with context",
+	Use:     "kontext",
+	Short:   "Work with context",
+	Version: VERSION,
 }
 
 func Execute() {
